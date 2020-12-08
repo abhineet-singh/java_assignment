@@ -6,17 +6,28 @@ public class Application {
 
 		System.out.println(person.calculate());
 	}
-
+	
+// this method is a factory method which returns an instance of Billable
+	public static Billable getProfessionObject(int key) {
+		
+		switch(key) {
+		case 1: 
+			return new SoftwareEngineer(3);
+		case 2:
+			return new Plumber("High");
+		case 3:
+			return new Advocate("Senior");
+		default:
+			return null;
+			
+		}
+	}
+	
 	public static void main(String[] args) {
 		
-		SoftwareEngineer newSE = new SoftwareEngineer(3);
-		Plumber newPlumber = new Plumber("High");
-		Advocate newAdvocate = new Advocate("Senior");
+		Billable obj = getProfessionObject(Integer.parseInt(args[0]));
 		
-		printSalary(newSE);
-		printSalary(newPlumber);
-		printSalary(newAdvocate);
-
+		printSalary(obj);
 	}
 
 }
