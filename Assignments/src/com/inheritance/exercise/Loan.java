@@ -1,4 +1,4 @@
-package day3_A1;
+package com.inheritance.exercise;
 
 public class Loan {
 	
