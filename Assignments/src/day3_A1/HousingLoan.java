@@ -4,12 +4,11 @@ public class HousingLoan extends Loan {
 	
 	private double loanAmount;
 	private double loanPeriod;
-	private double cibilScore;
 	
 	public HousingLoan(double loanAmount, double loanPeriod, double cibilScore) {
+		super(cibilScore);
 		this.loanAmount = loanAmount;
 		this.loanPeriod = loanPeriod;
-		this.cibilScore = cibilScore;
 	}
 	
 	@Override
@@ -38,18 +37,5 @@ public class HousingLoan extends Loan {
 	public void setLoanPeriod(double loanPeriod) {
 		this.loanPeriod = loanPeriod;
 	}
-
-	public double getCibilScore() {
-		return cibilScore;
-	}
-
-	public void setCibilScore(double cibilScore) {
-		this.cibilScore = cibilScore;
-	}
-
-	
-	
-	
-
 
 }

@@ -15,7 +15,7 @@ public class Loan {
 		
 		double rateOfInterest = 0.0;
 		
-		if(this.getCibilScore() > 500) {
+		if(this.getCibilScore() <= 500) {
 			rateOfInterest = 7.5;
 		}
 		else {

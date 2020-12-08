@@ -8,7 +8,7 @@ public class Application {
 		
 		double interest = newHousingLoan.findRateOfInterest();
 		
-		System.out.println(interest);
+		System.out.println("Interest is:= " + interest);
 
 	}
 
