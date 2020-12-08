@@ -9,7 +9,6 @@ public class Application {
 		double interest = newHousingLoan.findRateOfInterest();
 		
 		System.out.println("Interest is:= " + interest);
-
 	}
 
 }

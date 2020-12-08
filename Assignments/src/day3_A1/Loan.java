@@ -29,7 +29,6 @@ public class Loan {
 		return cibilScore;
 	}
 	
-
 	public void setCibilScore(int cibilScore) {
 		this.cibilScore = cibilScore;
 	}
