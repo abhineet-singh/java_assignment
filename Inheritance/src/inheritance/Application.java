@@ -20,7 +20,17 @@ public class Application {
 		
 		newStudentService.printStudentList(studentList_2);
 		
+		System.out.println("==============================");
+		
 		newStudentService.displayStudentList(studentList[0],studentList[1]);
+		
+		System.out.println("==============================");
+		
+		EnhancedStudentService ess = new EnhancedStudentService();
+		
+		ess.printStudentList(studentList_2);
+		
+		System.out.println("==============================");
 		
 		System.out.println(s1);
 
