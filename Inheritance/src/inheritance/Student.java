@@ -45,7 +45,5 @@ public class Student {
 	public void setMarksScored(String marksScored) {
 		this.marksScored = marksScored;
 	}
-	
-	
 
 }
