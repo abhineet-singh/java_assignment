@@ -16,6 +16,11 @@ public class Student {
 		this.name = name;
 		this.marksScored = marksScored;
 	}
+	
+	@Override  // check if the constraints matches of the overrides method
+	public String toString() {	
+		return (this.rollNumber + " " + this.name + " " + this.marksScored);
+	}
 
 	public int getRollNumber() {
 		return rollNumber;
