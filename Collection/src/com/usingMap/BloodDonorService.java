@@ -16,11 +16,15 @@ public class BloodDonorService {
 		ArrayList<BloodDonor> donorList = bloodDonorMap.get(donor.getBloodGroup());
 
 	    if(donorList == null) {
+	    	
 	    	donorList = new ArrayList<BloodDonor>();
+	    	
 	    	donorList.add(donor);
+	    	
 	    	this.bloodDonorMap.put(donor.getBloodGroup(), donorList);
 	    } 
 	    else {
+	    	
 	        if(!donorList.contains(donor)) {
 	        	donorList.add(donor);
 	        }
