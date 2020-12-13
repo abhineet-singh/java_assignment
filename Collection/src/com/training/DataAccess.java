@@ -11,5 +11,4 @@ public interface DataAccess<T> {
 	public List<T> findAll();
 	
 	public List<T> sortedList(String sortByField);
-
 }
