@@ -158,6 +158,44 @@ public class DoctorDaoImpl implements DataAccess<Doctor> {
 		return doctorList;
 	}
 
+
+	@Override
+	public int[] addInBatch(Doctor ...doctors) {
+		
+		String sql = "insert into lumen_doctor values(?,?,?,?,?) ";
+		int[] rows = null;
+		
+		try(PreparedStatement pstmt = con.prepareStatement(sql)){
+			
+			con.setAutoCommit(false);
+			
+			for(Doctor doc : doctors){
+				
+				pstmt.setInt(1, doc.getDoctorId());
+				pstmt.setString(2, doc.getDoctorName());
+				pstmt.setString(3, doc.getSpecialization());
+				pstmt.setLong(4,doc.getMobileNumber());
+					
+				pstmt.setDate(5,Date.valueOf(doc.getDateOfBirth()));
+				
+				pstmt.addBatch();
+				
+			}
+			
+			rows = pstmt.executeBatch();
+			
+			con.commit();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return rows;
+
+	}
+	
+
+
 	public Connection getCon() {
 		return con;
 	}
@@ -166,4 +204,46 @@ public class DoctorDaoImpl implements DataAccess<Doctor> {
 		this.con = con;
 	}
 
+	@Override
+	public void usingTransactions() {
+		
+		String sql1 = "insert into lumen_doctor(doctorId,doctorName) values(?,?)";
+		String sql2 = "inseert into lumen_doctor(doctorId,doctorName) values(?,?)";
+		Savepoint p1 = null;
+		
+		try {
+			
+			con.setAutoCommit(false);
+			PreparedStatement pstmt1 = con.prepareStatement(sql1);
+			PreparedStatement pstmt2 = con.prepareStatement(sql2);
+			
+			pstmt1.setInt(1, 123);
+			pstmt1.setString(2, "dummy");
+			
+			pstmt1.executeUpdate();
+			
+			p1 = con.setSavepoint("point1");
+			
+			pstmt2.setInt(1, 123);
+			pstmt2.setString(2, "munna");
+			
+			pstmt2.executeUpdate();
+			
+			con.commit();
+		}
+		catch(SQLException e) {
+			
+			e.printStackTrace();
+			
+			try {
+				con.rollback(p1);
+			} 
+			catch (Exception e2) {
+				e2.printStackTrace();
+			}
+		}
+		
+		return;
+		
+	}
 }

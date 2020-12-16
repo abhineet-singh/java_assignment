@@ -13,7 +13,7 @@ public class Application {
 		
 		// System.out.println(DBConnectionUtil.getMySqlConnection());
 		
-		int key = 5;
+		int key = 7;
 		DataAccess<Doctor> dao = new DoctorDaoImpl();
 		
 		switch (key) {
@@ -38,6 +38,18 @@ public class Application {
 		case 5:
 			Doctor doc3 = dao.findById(1235);
 			System.out.println(doc3);
+			break;
+		case 6:
+			Doctor doc4 = new Doctor(1237, "xyz", 88776633, "heart", LocalDate.of(1998, 10, 29));
+			Doctor doc5 = new Doctor(1238, "pqr", 88776633, "kidney", LocalDate.of(1998, 10, 29));
+			
+			int[] rows = dao.addInBatch(doc4,doc5);
+			for(int res : rows) {
+				System.out.println(res);
+			}
+			break;
+		case 7:
+			dao.usingTransactions();
 			break;
 		default:
 			break;
