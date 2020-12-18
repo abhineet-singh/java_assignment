@@ -46,12 +46,10 @@ public class ValidationServlet extends HttpServlet {
 		String password = request.getParameter("password");
 		String role = request.getParameter("role");
 		
-		User user = new User(userName, password, role);
-		
+		User user = new User(userName, password, role);		
 		System.out.println(user);
 
-		boolean isValidUser = validator.validate(user);
-		
+		boolean isValidUser = validator.validate(user);		
 		System.out.println(isValidUser);
 		
 		RequestDispatcher dispatcher;
