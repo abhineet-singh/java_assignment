@@ -2,6 +2,7 @@ package com.training.servlet;
 
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.List;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
@@ -10,9 +11,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-
-import com.training.model.*;
+import com.training.model.BloodDonor;
 import com.training.service.BloodDonorService;
 import com.training.utils.DBConnectionUtil;
 
@@ -40,9 +41,13 @@ public class BloodDonorServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		List<BloodDonor> donorList = donorServ.findAll(con);
+		
+		request.setAttribute("donorList", donorList);
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("showDonor.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	/**
@@ -50,28 +55,41 @@ public class BloodDonorServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String name = request.getParameter("name");
+		HttpSession session = request.getSession();
+
+		boolean isAuthenticated = (boolean) session.getAttribute("isAuthenticated");
+		System.out.println(isAuthenticated);
 		
-		int age = Integer.parseInt(request.getParameter("age"));
+		if(isAuthenticated) {
 		
-		String gender = request.getParameter("gender");
-		String bloodGroup = request.getParameter("bloodGroup");
-		String phoneNumber = request.getParameter("phoneNumber");
-		String email = request.getParameter("email");
-		
-		LocalDate dateOfBirth = Date.valueOf(request.getParameter("dateOfBirth")).toLocalDate();
-;
-		
-		BloodDonor donor = new BloodDonor(name, age, gender, bloodGroup, phoneNumber, email, dateOfBirth);
-		System.out.println(donor);
-		
-		
-		Integer rowAdded = donorServ.add(this.con,donor);
-		
-		request.setAttribute("rowAdded", rowAdded);
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("input.jsp");
-		dispatcher.forward(request, response);
+			String name = request.getParameter("name");
+			
+			int age = Integer.parseInt(request.getParameter("age"));
+			
+			String gender = request.getParameter("gender");
+			String bloodGroup = request.getParameter("bloodGroup");
+			String phoneNumber = request.getParameter("phoneNumber");
+			String email = request.getParameter("email");
+			
+			LocalDate dateOfBirth = Date.valueOf(request.getParameter("dateOfBirth")).toLocalDate();
+	
+			
+			BloodDonor donor = new BloodDonor(name, age, gender, bloodGroup, phoneNumber, email, dateOfBirth);
+			System.out.println(donor);
+			
+			
+			Integer rowAdded = donorServ.add(this.con,donor);
+			System.out.println(rowAdded);
+			
+			request.setAttribute("rowAdded", rowAdded);
+			
+			RequestDispatcher dispatcher = request.getRequestDispatcher("input.jsp");
+			dispatcher.forward(request, response);
+		}
+		else {
+			RequestDispatcher dispatcher = request.getRequestDispatcher("index.html");
+			dispatcher.forward(request, response);
+		}
 
 	}
 

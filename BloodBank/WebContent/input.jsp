@@ -11,6 +11,7 @@
 </head>
 <body>
 
+<section>
 	<form action="donor" method="post">
 		<label for="">User name</label>
 		<input type="text" name="name"/><br>
@@ -36,6 +37,13 @@
 		
 		<input type="submit" value="Add" />
 	</form>
+	
+	<p>
+	<c:if test="${rowAdded > 0}">
+		<h3>Rows Added : </h3><c:out value="${rowAdded}"></c:out>
+	</c:if>
+	</p>
+</section>	
 	
 	
 </body>
