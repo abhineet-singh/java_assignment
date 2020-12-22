@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Choose Plan</title>
+</head>
+
+<style>
+input, select {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  border: 1px solid black;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+</style>
+<body>
+
+<div>
+	<form action="check" method="post">
+		<label for="">User name</label>
+		<input type="text" name="userName"/><br>
+		
+		<label for="">Choose a Plan:</label>
+		<select name="plans">
+			  <option value="200">Plan200</option>
+			  <option value="350">Plan350</option>
+			  <option value="550">Plan550</option>
+			  <option value="1700">Plan1700</option>
+		</select> 
+		
+		<input type="submit" value="Add" />
+	</form>
+</div>
+
+</body>
+</html>
