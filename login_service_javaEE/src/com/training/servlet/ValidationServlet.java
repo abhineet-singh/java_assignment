@@ -18,6 +18,18 @@ import com.training.service.Validator;
 @WebServlet("/valid")
 public class ValidationServlet extends HttpServlet {
 	
+	@Override
+	public void destroy() {
+		super.destroy();
+		System.out.println("destroy called ");
+	}
+
+	@Override
+	public void init() throws ServletException {	
+		super.init();
+		System.out.println("init called ");
+	}
+
 	private Validator validator;
 	private static final long serialVersionUID = 1L;
        
@@ -27,6 +39,8 @@ public class ValidationServlet extends HttpServlet {
     public ValidationServlet() {
         super();
         this.validator = new Validator();
+        
+        System.out.println("constructor called ");
     }
 
 	/**
