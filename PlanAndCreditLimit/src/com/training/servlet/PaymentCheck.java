@@ -45,30 +45,11 @@ public class PaymentCheck extends HttpServlet {
 		
 		int planAmt = Integer.parseInt(request.getParameter("plans"));
 		
-		if(this.userCredit.getUserCreditMap().containsKey(userName)) {
+		int isPaymentSuccessful =  this.userCredit.updateCreditLimit(userName, planAmt);
 		
-			int currentLimitOfUser =  this.userCredit.getUserCreditMap().get(userName);
-			
-			System.out.println(currentLimitOfUser);
-			
-			if(currentLimitOfUser >= planAmt) {
-				
-				request.setAttribute("isPaymentSuccessful", 1);
-				
-				currentLimitOfUser -= planAmt;
-				
-				this.userCredit.getUserCreditMap().replace(userName, currentLimitOfUser);	
-			}
-			else {
-				
-				request.setAttribute("isPaymentSuccessful", 0);			
-			}
-			
-			request.setAttribute("creditLimit", currentLimitOfUser);
-		}
-		else {
-			request.setAttribute("isPaymentSuccessful", -1);	
-		}
+		request.setAttribute("creditLimit", this.userCredit.getCreditLimitOfUser(userName));
+		
+		request.setAttribute("isPaymentSuccessful", isPaymentSuccessful);
 		
 		RequestDispatcher dispatcher = request.getRequestDispatcher("msg.jsp");
 		dispatcher.forward(request, response);

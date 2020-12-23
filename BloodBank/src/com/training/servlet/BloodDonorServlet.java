@@ -57,7 +57,7 @@ public class BloodDonorServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 
-		boolean isAuthenticated = (boolean) session.getAttribute("isAuthenticated");
+		Boolean isAuthenticated =  (Boolean) session.getAttribute("isAuthenticated");
 		System.out.println(isAuthenticated);
 		
 		if(isAuthenticated) {

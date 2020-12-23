@@ -16,11 +16,41 @@ public class UserCredit {
 		this.userCreditMap.put("pqr", 2000);
 	}
 
-	public Map<String, Integer> getUserCreditMap() {
-		return userCreditMap;
+	
+	public int updateCreditLimit(String userName, int deductionAmt) {
+		
+		int isDeductedSuccessfully = 1;
+		
+		if(this.userCreditMap.containsKey(userName)) {
+			
+			int currentLimitOfUser =  this.userCreditMap.get(userName);
+			
+			if(currentLimitOfUser >= deductionAmt) {
+				
+				currentLimitOfUser -= deductionAmt;
+				
+				this.userCreditMap.replace(userName, currentLimitOfUser);	
+			}
+			else {		
+				isDeductedSuccessfully = 0;		
+			}	
+		}
+		else {
+			isDeductedSuccessfully = -1;
+		}
+		
+		return isDeductedSuccessfully;
 	}
 	
-	
-	
-
+	public int getCreditLimitOfUser(String userName) {
+		
+		int creditLimitAmt = 0;
+		
+		if(this.userCreditMap.containsKey(userName)) {
+			
+			creditLimitAmt = this.userCreditMap.get(userName);
+		}
+		
+		return creditLimitAmt;
+	}
 }
