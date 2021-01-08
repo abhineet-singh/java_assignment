@@ -1,0 +1,3 @@
+closeFriend	[ashutosh, pulkit]
+professionalFriend	[abhishek]
+relative	[abhi, abhineet]
